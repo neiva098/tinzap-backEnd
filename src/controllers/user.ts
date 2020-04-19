@@ -10,9 +10,11 @@ export const registry = async (user: User) => {
 
   if (isUserRegistred) throw new HttpError(400, ' This user already exists')
 
-  return await model.insertMany([
+  const userInserted = await model.insertMany([
     user,
   ])
+
+  return userInserted[0]
 }
 
 export const logIn = async (phone: string) => {
