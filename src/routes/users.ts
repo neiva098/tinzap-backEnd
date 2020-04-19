@@ -23,7 +23,17 @@ routes.post('/registry', async (req: Request, res: Response, next: NextFunction)
     }
 })
 
-routes.get('logIn/:phone', async (req: Request, res: Response, next: NextFunction) =>{
+routes.get('logIn/request/:phone', async (req: Request, res: Response, next: NextFunction) =>{
+    try {
+        const user = await logIn(req.params.phone)
+
+        res.json(user)
+    } catch (error) {
+        next({ code: error.statusCode, message: error.message })
+    }
+})
+
+routes.get('logIn/try/:phone/:key',async (req: Request, res: Response, next: NextFunction) =>{
     try {
         const user = await logIn(req.params.phone)
 
