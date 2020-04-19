@@ -1,13 +1,33 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { index, like, dislike } from '../controllers/user'
+import { index, like, dislike, registry, logIn } from '../controllers/user'
 
 const routes = Router()
 
-routes.get('/', async (req: Request, res: Response, next: NextFunction) => {
+routes.get('/getCrushs', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const users = await index(req.get('user')!)
 
         res.json(users)
+    } catch (error) {
+        next({ code: error.statusCode, message: error.message })
+    }
+})
+
+routes.post('/registry', async (req: Request, res: Response, next: NextFunction) =>{
+    try {
+        const user = await registry(req.body)
+
+        res.json(user)
+    } catch (error) {
+        next({ code: error.statusCode, message: error.message })
+    }
+})
+
+routes.get('logIn/:phone', async (req: Request, res: Response, next: NextFunction) =>{
+    try {
+        const user = await logIn(req.params.phone)
+
+        res.json(user)
     } catch (error) {
         next({ code: error.statusCode, message: error.message })
     }
