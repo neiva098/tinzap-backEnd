@@ -15,6 +15,16 @@ export const registry = async (user: User) => {
   ])
 }
 
+export const logIn = async (phone: string) => {
+  const isUserRegistred = await model.findOne({
+    phone: phone,
+  }, {_id: 1})
+
+  if (!isUserRegistred) throw new HttpError(400, 'User not found')
+
+  return isUserRegistred.id
+}
+
 export const index = async (id: string) => {
   const loggedUser = await model.findById(id)
 
