@@ -1,6 +1,20 @@
 import { Schema, model } from 'mongoose'
 
 const userSchema = new Schema({
+    mail: {
+        type: String,
+        required: false,
+        unique: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
     profile: {
         type: Object,
         required: true,
@@ -13,7 +27,10 @@ const userSchema = new Schema({
             type: String,
             required: true,
         },
-        photos_base_64: Array
+        photos_base_64: {
+            type: Array,
+            required: true,
+        }
     },
     likes: [{
         type: Schema.Types.ObjectId,

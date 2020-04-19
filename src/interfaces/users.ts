@@ -1,5 +1,8 @@
 export interface User {
     _id: string,
+    mail: string,
+    password: string,
+    phone: string,
     profile: {
         name: string,
         bio: string,
