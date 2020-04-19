@@ -1,19 +1,10 @@
 import { Schema, model } from 'mongoose'
 
 const userSchema = new Schema({
-    mail: {
-        type: String,
-        required: false,
-        unique: true,
-    },
     phone: {
         type: String,
         required: true,
         unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
     },
     profile: {
         type: Object,
@@ -30,6 +21,10 @@ const userSchema = new Schema({
         photos_base_64: {
             type: Array,
             required: true,
+        },
+        gender: {
+            type: String,
+            required: true
         }
     },
     likes: [{
